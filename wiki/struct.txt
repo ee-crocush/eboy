@@ -1,0 +1,25 @@
+game-state
+├── internal
+│   ├── api // апи для rest и сокетам
+│   │   ├── handlers.go
+│   │   └── websocket.go
+│   ├── config // конфиги
+│   │   └── config.go
+│   ├── grpc
+│   │   ├── client // grpc клиент сервиса если нужен
+│   │   │   └── client.go
+│   │   └── server // grpc сервер сервиса если нужен
+│   │       └── server.go
+│   ├── game // тут уже вся логика
+│   ├── models // модели
+│   │   └── models.go
+│   └── storage // тут работа с БД
+│       └── storage.go
+├── pkg
+│   └── pb // сгенерированные контракты
+│       ├── game_state.pb.go
+│       └── game_state_grpc.pb.go
+├── proto
+│   └── gamestate.proto //здесь контракты
+├── go.mod
+└── main.go

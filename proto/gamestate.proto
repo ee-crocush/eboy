@@ -1,0 +1,118 @@
+syntax = "proto3";
+
+package gamestate;
+
+// Модель для координат в гексогональной сетке
+message HexCoordinates {
+  int32 q = 1;
+  int32 r = 2;
+  int32 s = 3;
+}
+
+// Нейтральные объекты (например, лес, река и т.д.)
+message NeutralObject {
+  int32 id = 1;               // Идентификатор
+  string name = 2;            // Наименование
+  HexCoordinates coordinates = 3; // Координаты
+  float capacity = 4;         // Общая вместимость
+  float current_amount = 5;   // Текущий доступный объем
+}
+
+// Структура зданий
+message Building {
+  int32 id = 1;               // Идентификатор
+  string name = 2;            // Наименование
+  HexCoordinates coordinates = 3; // Координаты
+  int32 level = 4;            // Уровень здания
+  int32 hp = 5;               // Очки здоровья
+}
+
+// Структура героев
+message Hero {
+  int32 id = 1;               // Идентификатор
+  string name = 2;            // Имя героя
+  HexCoordinates coordinates = 3; // Координаты
+  int32 hp = 4;               // Очки здоровья
+  float experience = 5;       // Опыт героя
+  float experience_to_up = 6; // Опыт героя до следующего уровня
+  int32 level = 7;            // Уровень героя
+}
+
+// Запрос для получения начального состояния игрового мира
+message GetInitialWorldStateRequest {
+  int32 user_id = 1; // Идентификатор
+}
+
+// Ответ с начальным состоянием игрового мира
+message GetInitialWorldStateResponse {
+  int32 session_id = 1;        // Идентификатор сессии
+  int32 user_id = 2;           // Идентификатор пользователя
+  int32 area_id = 3;           // Идентификатор зоны/региона
+  repeated NeutralObject neutrals = 4; // Список нейтральных объектов
+  repeated Building buildings = 5;     // Список зданий
+  repeated Hero heroes = 6;            // Список героев
+  string timestamp = 7;         // Временная метка
+}
+
+// Запрос на сохранение состояния игрового мира
+message SaveWorldStateRequest {
+  int32 session_id = 1;        // Идентификатор сессии
+  int32 user_id = 2;           // Идентификатор пользователя
+  int32 area_id = 3;           // Идентификатор зоны/региона
+  repeated NeutralObject neutrals = 4; // Список нейтральных объектов
+  repeated Building buildings = 5;     // Список зданий
+  repeated Hero heroes = 6;            // Список героев
+  string timestamp = 7;         // Временная метка
+}
+
+// Ответ на сохранение состояния игрового мира
+message SaveWorldStateResponse {
+  bool success = 1;           // Флаг успешности
+  string message = 2;         // Сообщение
+}
+
+// Запрос на обновление состояния игрового мира
+message UpdateWorldStateRequest {
+  int32 session_id = 1;        // Идентификатор сессии
+  int32 user_id = 2;           // Идентификатор пользователя
+  int32 area_id = 3;           // Идентификатор зоны/региона
+  repeated NeutralObject neutrals = 4; // Список нейтральных объектов
+  repeated Building buildings = 5;     // Список зданий
+  repeated Hero heroes = 6;            // Список героев
+  string timestamp = 7;         // Временная метка
+}
+
+// Ответ на обновление состояния игрового мира
+message UpdateWorldStateResponse {
+  bool success = 1;           // Флаг успешности
+  string message = 2;         // Сообщение
+}
+
+// Запрос на получение текущего состояния игрового мира
+message GetWorldStateRequest {
+  int32 user_id = 1;          // Идентификатор пользователя
+}
+
+// Ответ с текущим состоянием игрового мира
+message GetWorldStateResponse {
+  int32 session_id = 1;        // Идентификатор сессии
+  int32 user_id = 2;           // Идентификатор пользователя
+  int32 area_id = 3;           // Идентификатор зоны/региона
+  repeated Action actions = 4; // Список действий (например, move, attack и т.д.)
+  string timestamp = 5;        // Временная метка
+}
+
+// Модель действия (например, передвижение, атака)
+message Action {
+  int32 id = 1;               // Уникальный идентификатор действия
+  string type = 2;            // Тип действия (например, "move")
+  string status = 3;          // Статус действия (например, "in_progress")
+}
+
+// gRPC сервисы
+service GameStateService {
+  rpc GetInitialWorldState(GetInitialWorldStateRequest) returns (GetInitialWorldStateResponse);
+  rpc SaveWorldState(SaveWorldStateRequest) returns (SaveWorldStateResponse);
+  rpc UpdateWorldState(UpdateWorldStateRequest) returns (UpdateWorldStateResponse);
+  rpc GetWorldState(GetWorldStateRequest) returns (GetWorldStateResponse);
+}
