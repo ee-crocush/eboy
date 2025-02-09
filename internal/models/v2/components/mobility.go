@@ -32,7 +32,7 @@ func NewMobility(q, r, s, speed, vision int) (*Mobility, error) {
 	}, nil
 }
 
-// Move перемещает объект на указанные координаты (с учетом скорости)
+// Move перемещает объект на указанные координаты
 func (m *Mobility) Move(deltaQ, deltaR, deltaS int) error {
 	newQ := m.Position.Q + deltaQ
 	newR := m.Position.R + deltaR

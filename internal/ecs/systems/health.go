@@ -1,8 +1,8 @@
 package systems
 
 import (
-	"game-state/internal/components"
 	"game-state/internal/ecs"
+	"game-state/internal/ecs/components"
 )
 
 // HealthSystem - система для обработки здоровья.

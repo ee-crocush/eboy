@@ -4,9 +4,9 @@ import (
 	"fmt"
 	handlers "game-state/internal/api/http"
 	"game-state/internal/api/websocket"
-	"game-state/internal/components"
 	"game-state/internal/ecs"
-	"game-state/internal/systems"
+	"game-state/internal/ecs/components"
+	"game-state/internal/ecs/systems"
 	"github.com/gofiber/fiber/v3"
 	"log"
 )
