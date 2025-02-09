@@ -1,6 +1,6 @@
 //world_state.go - состояние мира игрока
 
-package models
+package old
 
 import (
 	"github.com/shopspring/decimal"
