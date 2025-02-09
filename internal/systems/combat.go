@@ -12,11 +12,11 @@ type CombatSystem struct{}
 func (s *CombatSystem) Update(entities []*ecs.Entity) {
 	for _, entity := range entities {
 		if attack, ok := entity.GetComponent("attack").(*components.Attack); ok {
-			// Пример логики: если это дальнобойная атака, проверяем возможную цель
+			// Логика атаки
 			if attack.IsRange {
-				// Логика дальнобойных атак
+				println("Entity", entity.ID, "attack with range damage:", attack.Damage, "range:", attack.Range)
 			} else {
-				// Логика ближнего боя
+				println("Entity", entity.ID, "attack with melee damage:", attack.Damage)
 			}
 		}
 	}

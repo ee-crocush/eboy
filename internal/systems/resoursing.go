@@ -1,1 +1,3 @@
+// Добыча ресурсов
+
 package systems
