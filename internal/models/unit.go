@@ -15,3 +15,11 @@ type Unit struct {
 	Attack   *combat.Attack       `json:"attack"`   // Атака
 	//Modifiers []components.Modifier `json:"modifiers"`
 }
+
+func (u *Unit) GetID() int64 {
+	return u.ID
+}
+
+func (u *Unit) GetType() string {
+	return "unit"
+}
