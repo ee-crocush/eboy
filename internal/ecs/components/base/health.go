@@ -1,4 +1,4 @@
-package components
+package base
 
 // Health - компонент здоровья для сущности.
 type Health struct {
@@ -9,6 +9,7 @@ type Health struct {
 
 // ApplyDamage - применяет урон к здоровью.
 func (h *Health) ApplyDamage(damage int) {
+	// Рассчитываем эффективный урон
 	effectiveDamage := damage - h.Armor
 	if effectiveDamage < 0 {
 		effectiveDamage = 0

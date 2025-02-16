@@ -1,4 +1,4 @@
-package components
+package mobility
 
 // Mobility - компонент мобильности для сущности.
 type Mobility struct {

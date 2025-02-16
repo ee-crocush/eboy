@@ -1,14 +1,17 @@
 package models
 
 import (
-	components2 "game-state/internal/ecs/components"
+	"game-state/internal/ecs/components/base"
+	"game-state/internal/ecs/components/combat"
+	components "game-state/internal/ecs/components/mobility"
 )
 
 // Unit - сущность юнита.
 type Unit struct {
-	ID       int64                 `json:"id"`
-	Health   *components2.Health   `json:"health"`
-	Mobility *components2.Mobility `json:"mobility"`
-	Attack   *components2.Attack   `json:"attack"`
+	ID       int64                `json:"id"`       // ID юнита
+	Name     string               `json:"name"`     // Название юнита
+	Health   *base.Health         `json:"health"`   // Здоровье
+	Mobility *components.Mobility `json:"mobility"` // Перемещение
+	Attack   *combat.Attack       `json:"attack"`   // Атака
 	//Modifiers []components.Modifier `json:"modifiers"`
 }

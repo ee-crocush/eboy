@@ -5,7 +5,9 @@ import (
 	handlers "game-state/internal/api/http"
 	"game-state/internal/api/websocket"
 	"game-state/internal/ecs"
-	"game-state/internal/ecs/components"
+	"game-state/internal/ecs/components/base"
+	"game-state/internal/ecs/components/combat"
+	"game-state/internal/ecs/components/mobility"
 	"game-state/internal/ecs/systems"
 	"github.com/gofiber/fiber/v3"
 	"log"
@@ -36,9 +38,9 @@ func initWorld() {
 	unit := ecs.NewEntity(1)
 
 	// Добавляем компоненты юнита
-	unit.AddComponent("health", &components.Health{HP: 100, HPNow: 100, Armor: 10})
-	unit.AddComponent("mobility", &components.Mobility{Speed: 5, Vision: 3})
-	unit.AddComponent("attack", &components.Attack{Damage: 20, IsRange: false, Range: 1})
+	unit.AddComponent("health", &base.Health{HP: 100, HPNow: 100, Armor: 10})
+	unit.AddComponent("mobility", &mobility.Mobility{Speed: 5, Vision: 3})
+	unit.AddComponent("attack", &combat.Attack{Damage: 20, IsRange: false, Range: 1})
 
 	// Добавляем сущность в мир
 	world.AddEntity(unit)
